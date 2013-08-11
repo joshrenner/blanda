@@ -1,0 +1,24 @@
+@import "font-face"
+
+$type-font: Tahoma, Verdana, sans-serif
+$type-size: if(agent-is-mobile(), 12px, 14px)
+$type-color: #001e2f
+
+=type
+	font: normal normal $type-size $type-font
+	color: $type-color
+	blockquote
+		font-style: italic
+		margin-left: 1em
+
+$fonts: "calamityjane" 300, "wpagothic" 700, "recordascript" 300, "cleanyourneighborhood" 700
+@each $font in $fonts
+	$face: nth($font,1)
+	$weight: nth($font,2)
+	$path: "#{$face}/#{$face}"
+	+font-face("#{$face}", font-files("#{$path}.woff", "#{$path}.ttf", "#{$path}.svg"), font-url("#{$path}.eot", true), $weight, normal)
+
+=type-recordascript
+	$font: nth($fonts,3)
+	font-family: nth($font,1), serif
+	font-weight: nth($font,2)

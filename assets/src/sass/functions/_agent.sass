@@ -1,0 +1,94 @@
+/*
+ *	// constants
+ *	$agent-is-ie : (bool) should stylesheet compile for ie
+ *		* defaults to false if no ie version is set
+ *	$agent-ie-version : (number) version of ie to compile for
+ *
+ *	// functions
+ *	agent-is-ie 	: (bool) true if compiling for ie
+ *	agent-is-ie-lt7	: (bool) true if ie version is less than 7
+ *	agent-is-ie-7 	: (bool) true if ie version is exactly 7
+ *	agent-is-ie-gt7 : (bool) true if ie version is greater than 7
+ *	agent-is-ie-lt8	: (bool) true if ie version is less than 8
+ *	agent-is-ie-8 	: (bool) true if ie version is exactly 8
+ *	agent-is-ie-gt8 : (bool) true if ie version is greater than 8
+ *	agent-is-ie-lt9	: (bool) true if ie version is less than 9
+ *	agent-is-ie-9 	: (bool) true if ie version is exactly 9
+ *	agent-is-ie-gt9 : (bool) true if ie version is greater than 9
+ *	agent-is-ie-lt10: (bool) true if ie version is less than 10
+ *	agent-is-ie-10 	: (bool) true if ie version is exactly 10
+ *	agent-has-gradient 	: (bool) true if agent supports background gradient
+ *	agent-has-filter 	: (bool) true if agent supports gradient filter
+ *	agent-has-box-shadow 	: (bool) true if agent supports box shadow
+ *
+ *	//description
+ *	Provides functions to determine agent the stylesheet is being compiled for.
+ *	Use these functions to write declarations specific to an agent's capabilities.
+ */
+
+$agent-ie-version: 0 !default
+$agent-device: desktop !default
+
+@function agent-is-ie()
+	@return $agent-ie-version > 0
+@function agent-is-legacy()
+	@return not($agent-ie-version == 0) and $agent-ie-version < 9
+@function agent-is-modern()
+	@return not(agent-is-legacy())
+@function agent-is-mobile()
+	@return $agent-device == mobile
+@function agent-is-tablet()
+	@return $agent-device == tablet
+@function agent-is-desktop()
+	@return $agent-device == desktop
+@function agent-is-print()
+	@return $agent-device == print
+
+
+@function agent-is-ie-lt7()
+	@return agent-is-ie() and $agent-ie-version < 7
+
+@function agent-is-ie-7()
+	@return agent-is-ie() and $agent-ie-version == 7
+
+@function agent-is-ie-gt7()
+	@return agent-is-ie() and $agent-ie-version > 7
+
+@function agent-is-ie-lt8()
+	@return agent-is-ie() and $agent-ie-version < 8
+
+@function agent-is-ie-8()
+	@return agent-is-ie() and $agent-ie-version == 8
+
+@function agent-is-ie-gt8()
+	@return agent-is-ie() and $agent-ie-version > 8
+
+@function agent-is-ie-lt9()
+	@return agent-is-ie() and $agent-ie-version < 9
+
+@function agent-is-ie-9()
+	@return agent-is-ie() and $agent-ie-version == 9
+
+@function agent-is-ie-gt9()
+	@return agent-is-ie() and $agent-ie-version > 9
+
+@function agent-is-ie-lt10()
+	@return agent-is-ie() and $agent-ie-version < 10
+
+@function agent-is-ie-10()
+	@return agent-is-ie() and $agent-ie-version == 10
+
+@function agent-has-gradient()
+	@return not agent-is-ie() or agent-is-ie-gt8()
+
+@function agent-has-filter()
+	@return agent-is-ie-lt9()
+
+@function agent-has-box-shadow()
+	@return not agent-is-ie() or agent-is-ie-gt8()
+
+@function agent-has-border-radius()
+	@return not agent-is-ie() or agent-is-ie-gt8()
+
+@function agent-has-rgba()
+	@return not agent-is-ie() or agent-is-ie-gt8()
